@@ -18,4 +18,3 @@ accordionContainer.addEventListener('click', e => {
 
 
 
-
