@@ -57,11 +57,11 @@ html {
 }
 
 body {
-    margin: 0;
-    background-image: linear-gradient(135deg, #ffc96a, #ffbfdd);
-    min-height: 100vh;
-    padding: 3em;
-    font-size: var(--fs-body);
+  margin: 0;
+  background-image: linear-gradient(135deg, #ffc96a, #ffbfdd);
+  min-height: 100vh;
+  padding: 3em;
+  font-size: var(--fs-body);
 }
 
 h2 {
@@ -165,7 +165,13 @@ a:active {
 
 /* accordion content */
 .accordion__content {
-  display: none;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease-out; /*animate the height*/
+}
+
+.accordion__inner {
+  display: grid;
   grid-template-columns: 7.5em 1fr;
   gap: 1.5em;
   align-items: center;
@@ -177,9 +183,4 @@ a:active {
 .accordion__content svg {
   width: 10em;
   max-width: 100%;
-}
-
-/* opens the accordion */
-.accordion.is-open .accordion__content {
-  display: grid;
 }
