@@ -11,14 +11,15 @@ accordionContainer.addEventListener('click', e => {
         const accordionContent = accordionHeader.nextElementSibling
         const accordionInner = accordionContent.children[0]
 
-        const height = accordionInner.getBoundingClientRect().height //get the height of accordionInner
+        let height
 
         if (accordion.classList.contains('is-open')) {
-            accordionContent.style.height = 0
+            height = 0
         } else {
-            accordionContent.style.height = height + 'px'  //set the correct height
+            height = accordionInner.getBoundingClientRect().height //get the height of accordionInner
         }
         accordion.classList.toggle('is-open')
+        accordionContent.style.height = height + 'px' //set the correct height
     } 
 })
 
