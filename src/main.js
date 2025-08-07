@@ -1,25 +1,38 @@
 
-// attach the event listener to the nearest common ancestor
-const accordionContainer = document.querySelector('.accordion__container')
+/**
+ * Finds the correct height of the accordion content
+ * @param {HTMLElement} accordion The accordion
+ */
+function getContentHeight (accordion) {
+    const accordionInner = accordion.querySelector('.accordion__inner')
 
-//add an event listener with event delegation
+    if(accordion.classList.contains('is-open')) return 0
+    return accordionInner.getBoundingClientRect().height
+}
+
+/**
+ * Updates accordion
+ * @param {Number} height px value of height to update
+ */
+function updateAccordion (accordion, height) {
+    const accordionContent = accordion.querySelector('.accordion__content')
+
+    //updates the accordion
+    accordion.classList.toggle('is-open')
+    accordionContent.style.height = `${height}px` 
+}
+
+// Where stuff happens
+const accordionContainer = document.querySelector('.accordion__container')
 accordionContainer.addEventListener('click', e => {
     const accordionHeader = e.target.closest('.accordion__header')
     if (!accordionHeader) return //simplify with an early return
 
     const accordion = accordionHeader.parentElement
-    const accordionContent = accordionHeader.nextElementSibling
-    const accordionInner = accordionContent.children[0]
-
-    //refactor with a ternary operator
-    const height = accordion.classList.contains('is-open') 
-        ? 0
-        : accordionInner.getBoundingClientRect().height //get the height of accordionInner
+    const height = getContentHeight(accordion)
     
-    accordion.classList.toggle('is-open')
-    accordionContent.style.height = `${height}px` //set the correct height, use template literals
+    updateAccordion(accordion, height)
 })
-
 
 
 
